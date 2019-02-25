@@ -35,7 +35,10 @@ func main() {
 }
 
 func parseArgs() []string {
-	if len(os.Args) > 1 {
+	if len(os.Args) == 1 {
+		fmt.Println(help())
+		os.Exit(0)
+	} else if len(os.Args) > 1 {
 		if os.Args[1] == "--help" || os.Args[1] == "-h" {
 			fmt.Println(help())
 			os.Exit(0)
@@ -99,7 +102,7 @@ func diffArgs(fileMode, filePath string) []string {
 		args = []string{"diff", "--cached", filePath}
 	case "--no-index":
 		args = []string{"diff", "--no-index", "/dev/null", filePath}
-	case "--":
+	// case "--":
 	default:
 		args = []string{"diff", "--", filePath}
 	}
@@ -112,7 +115,7 @@ func help() string {
 Flags:
 	-h, --help     Show help.
 	-v, --version  Show application version.
-	
+
 Args:
   --
     Default mode, used on unstaged files.
