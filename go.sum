@@ -18,6 +18,7 @@ github.com/nsf/termbox-go v0.0.0-20190325093121-288510b9734e/go.mod h1:IuKpRQcYE
 github.com/waigani/diffparser v0.0.0-20190426062500-1f7065f429b5 h1:4yIx5P7EOBImq3ZdUT7ws9cJzECcROJU/qdUCe0susI=
 github.com/waigani/diffparser v0.0.0-20190426062500-1f7065f429b5/go.mod h1:CefseIIgCUqtn0B83Lc3+8F2L1V9viokWY2GQlkWGfs=
 golang.org/x/crypto v0.0.0-20160824173033-351dc6a5bf92/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+golang.org/x/sys v0.0.0-20190222072716-a9d3bda3a223 h1:DH4skfRX4EBpamg7iV4ZlCpblAHI6s6TDM39bFZumv8=
 golang.org/x/sys v0.0.0-20190222072716-a9d3bda3a223/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 gopkg.in/check.v1 v1.0.0-20160105164936-4f90aeace3a2/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/mgo.v2 v2.0.0-20150529124711-01ee097136da/go.mod h1:yeKp02qBN3iKW1OzL3MGk2IdtZzaj7SFntXj72NppTA=
