@@ -11,7 +11,6 @@ type KeyBinding struct {
 	Modifier    gocui.Modifier
 	Display     string
 	Description string
-	Vital       bool
 }
 
 type keyViewPair struct {
@@ -27,7 +26,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.quit,
 		Display:     "q",
 		Description: "Quit",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'q', main}] = quit
 	cursorUp := &KeyBinding{
@@ -35,7 +33,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.cursorUp,
 		Display:     "↑, k",
 		Description: "Cursor up",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{gocui.KeyArrowUp, main}] = cursorUp
 	keymap[&keyViewPair{'k', main}] = cursorUp
@@ -44,7 +41,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.cursorDown,
 		Display:     "↓, j",
 		Description: "Cursor down",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{gocui.KeyArrowDown, main}] = cursorDown
 	keymap[&keyViewPair{'j', main}] = cursorDown
@@ -53,7 +49,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.stageHunk,
 		Display:     "space",
 		Description: "Stage/Unstage",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{gocui.KeySpace, main}] = add
 	nextHunk := &KeyBinding{
@@ -61,7 +56,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.nextHunk,
 		Display:     "n",
 		Description: "Next hunk",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'n', main}] = nextHunk
 	prevHunk := &KeyBinding{
@@ -69,7 +63,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.prevHunk,
 		Display:     "N",
 		Description: "Previous hunk",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'N', main}] = prevHunk
 	top := &KeyBinding{
@@ -77,7 +70,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.goTop,
 		Display:     "g",
 		Description: "Go to top",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'g', main}] = top
 	bottom := &KeyBinding{
@@ -85,7 +77,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.goBottom,
 		Display:     "G",
 		Description: "Go to bottom",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'G', main}] = bottom
 	openControls := &KeyBinding{
@@ -93,7 +84,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.createControlsView,
 		Display:     "c",
 		Description: "Open controls",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'c', main}] = openControls
 	quitControls := &KeyBinding{
@@ -101,7 +91,6 @@ func (e *Editor) generateKeybindings() error {
 		Handler:     e.closeControlsView,
 		Display:     "q",
 		Description: "Close controls",
-		Vital:       false,
 	}
 	keymap[&keyViewPair{'q', controls}] = quitControls
 	e.KeyBindings = keymap

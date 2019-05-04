@@ -102,7 +102,6 @@ func diffArgs(fileMode, filePath string) []string {
 		args = []string{"diff", "--cached", filePath}
 	case "--no-index":
 		args = []string{"diff", "--no-index", "/dev/null", filePath}
-	// case "--":
 	default:
 		args = []string{"diff", "--", filePath}
 	}

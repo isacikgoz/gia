@@ -227,6 +227,13 @@ func (e *Editor) setActiveHunk(hunk *editorHunk) {
 	hunk.selected = true
 }
 
+func (e *Editor) updateCursor(v *gocui.View) {
+	_, ucy := v.Cursor()
+	_, uoy := v.Origin()
+	e.setHunk(ucy + uoy)
+	e.updateView(0)
+}
+
 // move cursor down 1 line
 func (e *Editor) cursorDown(g *gocui.Gui, v *gocui.View) error {
 	if v != nil {
@@ -234,20 +241,15 @@ func (e *Editor) cursorDown(g *gocui.Gui, v *gocui.View) error {
 		ox, oy := v.Origin()
 		// magic number? (header and ?)
 		if cy+oy > e.totalDiffLines()-2 {
-
 		} else {
 			if err := v.SetCursor(cx, cy+1); err != nil {
-
 				if err := v.SetOrigin(ox, oy+1); err != nil {
 					return err
 				}
 			}
 		}
 	}
-	_, ucy := v.Cursor()
-	_, uoy := v.Origin()
-	e.setHunk(ucy + uoy)
-	e.updateView(0)
+	e.updateCursor(v)
 	return nil
 }
 
@@ -262,10 +264,7 @@ func (e *Editor) cursorUp(g *gocui.Gui, v *gocui.View) error {
 			}
 		}
 	}
-	_, ucy := v.Cursor()
-	_, uoy := v.Origin()
-	e.setHunk(ucy + uoy)
-	e.updateView(0)
+	e.updateCursor(v)
 	return nil
 }
 
@@ -301,17 +300,12 @@ func (e *Editor) nextHunk(g *gocui.Gui, v *gocui.View) error {
 			return err
 		}
 	}
-	_, ucy := v.Cursor()
-	_, uoy := v.Origin()
-	e.setHunk(ucy + uoy)
-	e.updateView(0)
+	e.updateCursor(v)
 	return nil
 }
 
 // move cursor up number of current diffhunk lines
 func (e *Editor) prevHunk(g *gocui.Gui, v *gocui.View) error {
-	_, ucy := v.Cursor()
-	_, uoy := v.Origin()
 	var newcy, anchor int
 	currentTotal := headerLength
 	for idx, h := range e.State.editorHunks {
@@ -334,10 +328,7 @@ func (e *Editor) prevHunk(g *gocui.Gui, v *gocui.View) error {
 			return err
 		}
 	}
-	_, ucy = v.Cursor()
-	_, uoy = v.Origin()
-	e.setHunk(ucy + uoy)
-	e.updateView(0)
+	e.updateCursor(v)
 	return nil
 }
 
@@ -350,10 +341,7 @@ func (e *Editor) goTop(g *gocui.Gui, v *gocui.View) error {
 			return err
 		}
 	}
-	_, ucy := v.Cursor()
-	_, uoy := v.Origin()
-	e.setHunk(ucy + uoy)
-	e.updateView(0)
+	e.updateCursor(v)
 	return nil
 }
 
@@ -377,12 +365,7 @@ func (e *Editor) goBottom(g *gocui.Gui, v *gocui.View) error {
 			}
 		}
 	}
-
-	_, ucy := v.Cursor()
-	_, uoy := v.Origin()
-	e.setHunk(ucy + uoy)
-	e.updateView(0)
-
+	e.updateCursor(v)
 	return nil
 }
 
