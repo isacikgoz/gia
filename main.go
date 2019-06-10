@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"os/exec"
 
@@ -18,19 +17,23 @@ func main() {
 	if err == nil {
 		editor, err := editor.NewEditor(file)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Fprintf(os.Stderr, "%v\n", err)
+			os.Exit(1)
 		}
 		patches, err := editor.Run()
 		if err != nil {
-			log.Fatal(err)
+			fmt.Fprintf(os.Stderr, "%v\n", err)
+			os.Exit(1)
 		}
 		for _, patch := range patches {
 			if err := applyPatch(args[2], patch); err != nil {
-				log.Fatal(err)
+				fmt.Fprintf(os.Stderr, "%v\n", err)
+				os.Exit(1)
 			}
 		}
 	} else {
-		log.Fatal("can't create diff for " + args[1] + " in " + args[2] + " mode")
+		fmt.Fprintf(os.Stderr, "can't create diff for %s mode.\n", args[1]+" in "+args[2])
+		os.Exit(1)
 	}
 }
 
@@ -127,5 +130,5 @@ Args:
 }
 
 func version() string {
-	return "gia version 0.1.0"
+	return "gia version 0.2.0"
 }
